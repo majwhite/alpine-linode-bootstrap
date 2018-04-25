@@ -10,7 +10,7 @@ iface eth0 inet dhcp
 "
 
 ALPINE_VER=${ALPINE_VER:-"latest-stable"}
-APK_TOOLS_VER=${APK_TOOLS_VER:-"2.6.7-r0"}
+APK_TOOLS_VER=${APK_TOOLS_VER:-"2.9.1-r2"}
 ARCH=$(uname -m)
 MIRROR="http://nl.alpinelinux.org/alpine"
 
@@ -57,8 +57,8 @@ set default="Alpine Linux"
 set timeout=0
     
 menuentry "Alpine Linux" {
-          linux /vmlinuz-grsec root=/dev/sdb modules=sd-mod,usb-storage,ext4 console=ttyS0 quiet
-          initrd /initramfs-grsec
+          linux /vmlinuz-hardened root=/dev/sdb modules=sd-mod,usb-storage,ext4 console=ttyS0 quiet
+          initrd /initramfs-hardened
 }
 EOF
 
@@ -86,6 +86,6 @@ rc-update add networking boot
 rc-update add urandom boot
 rc-update add cron
 
-apk add linux-grsec
+apk add linux-hardened
 
 CHROOT
